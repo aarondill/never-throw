@@ -1,0 +1,25 @@
+{
+  "name": "typescript-experiments",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "npm run lint && npm run clean",
+    "build": "tsc --build",
+    "clean": "rimraf ./dist",
+    "lint": "eslint ./src --ext .js,.ts --fix",
+    "sort-package": "sort-package-json",
+    "prewatch": "npm run clean",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "eslint": "^8.31.0",
+    "rimraf": "^3.0.2",
+    "sort-package-json": "^2.1.0",
+    "typescript": "^4.9.4"
+  }
+}
