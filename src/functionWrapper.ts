@@ -1,12 +1,12 @@
 import { assert, Equals } from "tsafe";
 
 /** Return values from the `functionWrapper` function */
-export type ReturnObject<func extends (...args: any) => any> = {
-	function: func;
-	args: Parameters<func>;
+export type ReturnObject<CallbackFunction extends (...args: any) => any> = {
+	function: CallbackFunction;
+	args: Parameters<CallbackFunction>;
 } & (
 	| {
-			return: ReturnType<func>;
+			return: ReturnType<CallbackFunction>;
 			error?: never;
 	  }
 	| {
@@ -21,9 +21,12 @@ export type ReturnObject<func extends (...args: any) => any> = {
  * 	object with `error` or `return` value depending on whether cb threw
  *  also has `args` and `function` properties, defined by the inputs
  */
-export const functionWrapper = function <cbArgs extends Array<any>, cbReturn>(
-	cb: (...args: cbArgs) => cbReturn,
-	...args: cbArgs
+export const functionWrapper = function <
+	CallbackArgs extends Array<any>,
+	CallbackReturn
+>(
+	cb: (...args: CallbackArgs) => CallbackReturn,
+	...args: CallbackArgs
 ): ReturnObject<typeof cb> {
 	/** Properties always returned */
 	const alwaysReturned = { function: cb, args } as const;
