@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
     "eslint": "^8.31.0",
     "rimraf": "^3.0.2",
     "sort-package-json": "^2.1.0",
