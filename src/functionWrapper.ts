@@ -1,7 +1,7 @@
 import { assert, Equals } from "tsafe";
 
 /** Return values from the `functionWrapper` function */
-type ReturnObject<func extends (...args: any) => any> = {
+export type ReturnObject<func extends (...args: any) => any> = {
 	function: func;
 	args: Parameters<func>;
 } & (
@@ -36,6 +36,7 @@ export const functionWrapper = function <cbArgs extends Array<any>, cbReturn>(
 		return { error: err, ...alwaysReturned };
 	}
 };
+export default functionWrapper;
 
 /* Type Testing */
 const func = <T>(a: T) => [1, "two", a] as const;
