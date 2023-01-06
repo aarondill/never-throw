@@ -18,7 +18,7 @@
 		"build": "tsc --build",
 		"clean": "rimraf ./dist",
 		"prelint": "npm run sort-package",
-		"lint": "eslint ./src --ext .js,.ts --fix",
+		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.mts,.cts,.tsx --fix",
 		"sort-package": "sort-package-json",
 		"pretest": "npm run lint",
 		"test": "jest",
