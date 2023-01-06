@@ -20,8 +20,7 @@ describe("Testing functionWrapper types", () => {
 /* Functionality Testing */
 
 describe("Testing noThrow", () => {
-	test("Default export or named export both work", () => {
-		expect(wrap).toBeDefined();
+	test("Default export is same object as named export", () => {
 		expect(wrap).toBe(noThrow);
 	});
 	describe("Test Error throwing", () => {
