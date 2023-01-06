@@ -1,19 +1,22 @@
 import { assert, Equals } from "tsafe";
 
-/** Return values from the `functionWrapper` function */
-export type ReturnObject<CallbackFunction extends (...args: any) => any> = {
-	function: CallbackFunction;
-	args: Parameters<CallbackFunction>;
-} & (
-	| {
-			return: ReturnType<CallbackFunction>;
-			error?: never;
-	  }
-	| {
-			return?: never;
-			error: Error;
-	  }
-);
+/** (Readonly) Return values from the `functionWrapper` function */
+export type ReturnObject<CallbackFunction extends (...args: any) => any> =
+	Readonly<
+		{
+			function: CallbackFunction;
+			args: Readonly<Parameters<CallbackFunction>>;
+		} & (
+			| {
+					return: ReturnType<CallbackFunction>;
+					error?: never;
+			  }
+			| {
+					return?: never;
+					error: Error;
+			  }
+		)
+	>;
 
 /**
  * @param {function} cb Takes a callback function
@@ -28,6 +31,12 @@ export const functionWrapper = function <
 	cb: (...args: CallbackArgs) => CallbackReturn,
 	...args: CallbackArgs
 ): ReturnObject<typeof cb> {
+	if (typeof cb !== "function") {
+		// Cause compiler error if anything other than function is ever allowed here
+		const _ensureThisNeverHappens: never = cb;
+		// If cb isn't callable, call it anyways to generate an error
+		(cb as () => {})();
+	}
 	/** Properties always returned */
 	const alwaysReturned = { function: cb, args } as const;
 	try {

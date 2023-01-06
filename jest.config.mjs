@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /** @type {import('jest').Config} */
 export default {
 	transform: { "^.+\\.ts?$": "ts-jest" },
