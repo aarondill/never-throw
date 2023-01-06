@@ -1,5 +1,3 @@
-import { assert, Equals } from "tsafe";
-
 /** (Readonly) Return values from the `functionWrapper` function */
 export type ReturnObject<CallbackFunction extends (...args: any) => any> =
 	Readonly<
@@ -35,7 +33,7 @@ export const functionWrapper = function <
 		// Cause compiler error if anything other than function is ever allowed here
 		const _ensureThisNeverHappens: never = cb;
 		// If cb isn't callable, call it anyways to generate an error
-		(cb as () => {})();
+		(cb as () => void)();
 	}
 	/** Properties always returned */
 	const alwaysReturned = { function: cb, args } as const;
@@ -49,9 +47,3 @@ export const functionWrapper = function <
 	}
 };
 export default functionWrapper;
-
-/* Type Testing */
-const func = <T>(a: T) => [1, "two", a] as const;
-type ReturnByFunc = ReturnType<typeof func> | undefined;
-type WrapReturned = ReturnObject<typeof func>["return"];
-assert<Equals<ReturnByFunc, WrapReturned>>();

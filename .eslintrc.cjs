@@ -64,7 +64,6 @@ module.exports = {
 		"@typescript-eslint/no-confusing-non-null-assertion": "warn",
 		"@typescript-eslint/no-extra-non-null-assertion": "error",
 		"@typescript-eslint/adjacent-overload-signatures": "error",
-		"@typescript-eslint/no-unnecessary-type-assertion": "error",
 		"@typescript-eslint/no-unnecessary-type-constraint": "warn",
 		"@typescript-eslint/no-useless-empty-export": "warn",
 		"@typescript-eslint/prefer-ts-expect-error": "warn",

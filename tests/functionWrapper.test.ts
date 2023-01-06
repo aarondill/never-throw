@@ -1,5 +1,17 @@
 import wrap, { functionWrapper, ReturnObject } from "../src/functionWrapper";
 
+/* Type Testing */
+
+import { Equals } from "tsafe";
+
+type Assert<_T extends true> = never;
+const func = <T>(a: T) => [1, "two", a] as const;
+type ReturnByFunc = ReturnType<typeof func> | undefined;
+type WrapReturned = ReturnObject<typeof func>["return"];
+type CompilerErrorIfFalse = Assert<Equals<ReturnByFunc, WrapReturned>>;
+
+/* Functionality Testing */
+
 describe("Testing functionWrapper", () => {
 	test("Default export or named export both work", () => {
 		expect(wrap).toBeDefined();
