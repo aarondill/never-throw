@@ -1,7 +1,7 @@
 {
 	"name": "no-throw",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Simplfy Error Handling",
 	"keywords": [
 		"try",
 		"catch",
@@ -10,7 +10,8 @@
 		"safe"
 	],
 	"license": "MIT",
-	"author": "",
+	"repository": "https://github.com/aarondill/no-throw",
+	"author": "Aaron Dill",
 	"main": "dist/noThrow.js",
 	"types": "dist/noThrow.d.ts",
 	"scripts": {
