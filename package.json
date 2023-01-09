@@ -2,9 +2,6 @@
 	"name": "@aarond309/never-throw",
 	"version": "1.0.3",
 	"description": "Simplfy Error Handling",
-	"files": [
-		"dist"
-	],
 	"keywords": [
 		"try",
 		"catch",
@@ -21,6 +18,9 @@
 	"author": "Aaron Dill",
 	"main": "dist/neverThrow.js",
 	"types": "dist/neverThrow.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"prebuild": "npm run lint && npm run clean",
 		"build": "tsc --build",
