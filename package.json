@@ -1,6 +1,6 @@
 {
 	"name": "@aarond309/never-throw",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Simplfy Error Handling",
 	"files": [
 		"dist"
