@@ -12,6 +12,9 @@
 		"tokenRef": "RELEASE_IT_GITHUB_TOKEN"
 	},
 	"hooks": {
-		"after:bump": "npx auto-changelog -p --commit-limit false && git add CHANGELOG.md"
+		"before:init": ["npm run lint", "npm test"],
+		"after:bump": "npx auto-changelog -p --commit-limit false",
+		"before:git:release": "git add . --update",
+		"after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
 	}
 }
