@@ -24,12 +24,12 @@
 		"clean": "rimraf ./dist",
 		"prelint": "npm run sort-package",
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.mts,.cts,.tsx --fix",
+		"prepublishOnly": "npm run build",
 		"sort-package": "sort-package-json",
 		"pretest": "npm run lint",
 		"test": "jest",
 		"prewatch": "npm run clean",
-		"watch": "tsc --watch",
-		"prepublishOnly": "npm run build"
+		"watch": "tsc --watch"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.2.5",
