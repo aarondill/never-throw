@@ -8,7 +8,7 @@ import the named functions
 (The neverThrow function can also be imported through the default import):
 
 ```javascript
-import { neverThrow, neverThrowAsync } from "../src/neverThrow";
+import { neverThrow, neverThrowAsync } from "@aarond309/never-throw";
 ```
 
 Call `foo` with error handling
