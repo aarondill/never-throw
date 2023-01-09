@@ -1,10 +1,15 @@
-import type { AwaitedSuccess, BaseReturn, Err, Success } from "../src/noThrow";
-import wrap, { noThrow, noThrowAsync } from "../src/noThrow";
+import type {
+	AwaitedSuccess,
+	BaseReturn,
+	Err,
+	Success,
+} from "../src/neverThrow";
+import wrap, { neverThrow, neverThrowAsync } from "../src/neverThrow";
 
 /* Type Testing */
 
 import type { Equals } from "tsafe";
-describe("Testing functionWrapper types", () => {
+describe("Testing neverThrow types", () => {
 	// All of this will be removed on successful compilation
 	// Won't compile if error
 	type Assert<_T extends true> = never;
@@ -19,9 +24,9 @@ describe("Testing functionWrapper types", () => {
 
 /* Functionality Testing */
 
-describe("Testing noThrow", () => {
+describe("Testing neverThrow", () => {
 	test("Default export is same object as named export", () => {
-		expect(wrap).toBe(noThrow);
+		expect(wrap).toBe(neverThrow);
 	});
 	describe("Test Error throwing", () => {
 		test("Catches Error Objects", () => {
@@ -29,7 +34,7 @@ describe("Testing noThrow", () => {
 			const throwErr = () => {
 				throw new Error();
 			};
-			expect(noThrow(throwErr)).toStrictEqual<Err<typeof throwErr>>({
+			expect(neverThrow(throwErr)).toStrictEqual<Err<typeof throwErr>>({
 				isErr: true,
 				error: new Error(),
 				args: [],
@@ -43,7 +48,7 @@ describe("Testing noThrow", () => {
 				throw errToThrow;
 			};
 			// Check equality
-			expect(noThrow(throwErrFunction)) //
+			expect(neverThrow(throwErrFunction)) //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
 					error: new Error(errToThrow),
@@ -58,7 +63,7 @@ describe("Testing noThrow", () => {
 				throw errToThrow;
 			};
 			// Check equality
-			expect(noThrow(throwErrFunction)) //
+			expect(neverThrow(throwErrFunction)) //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
 					error: new Error(String(errToThrow)),
@@ -72,7 +77,7 @@ describe("Testing noThrow", () => {
 			const throwErrFunction = () => {
 				throw errToThrow;
 			};
-			expect(noThrow(throwErrFunction)) //
+			expect(neverThrow(throwErrFunction)) //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
 					error: new Error(String(errToThrow)),
@@ -84,7 +89,7 @@ describe("Testing noThrow", () => {
 	describe("Test with successful function", () => {
 		test("Returns correct value with no arguments", () => {
 			const num = () => 42;
-			expect(noThrow(num)) //
+			expect(neverThrow(num)) //
 				.toStrictEqual<Success<typeof num>>({
 					isErr: false,
 					return: 42,
@@ -94,7 +99,7 @@ describe("Testing noThrow", () => {
 		});
 		test("Returns correct value with 1 argument", () => {
 			const strIdent = (x: string) => x;
-			expect(noThrow(strIdent, "hello world")) //
+			expect(neverThrow(strIdent, "hello world")) //
 				.toStrictEqual<Success<typeof strIdent>>({
 					isErr: false,
 					return: "hello world",
@@ -106,7 +111,7 @@ describe("Testing noThrow", () => {
 			/** Returns all arguments as an array */
 			const restIdentity = (...x: any[]) => x;
 			const inputArray = [0, 1, "2", 3, 4];
-			expect(noThrow(restIdentity, ...inputArray)) //
+			expect(neverThrow(restIdentity, ...inputArray)) //
 				.toStrictEqual<Success<typeof restIdentity>>({
 					isErr: false,
 					return: inputArray,
@@ -117,22 +122,22 @@ describe("Testing noThrow", () => {
 	});
 	describe("Intentional errors on misuse", () => {
 		test("Throws Error if called without a callback", () => {
-			expect(noThrow).toThrowError(/.+ is not a function/);
+			expect(neverThrow).toThrowError(/.+ is not a function/);
 		});
 		test("Throws Error if called with a callback that isn't callable", () => {
 			//@ts-expect-error
-			expect(() => noThrow(42)).toThrowError(/.+ is not a function/);
+			expect(() => neverThrow(42)).toThrowError(/.+ is not a function/);
 		});
 	});
 });
-describe("Testing noThrowAsync", () => {
+describe("Testing neverThrowAsync", () => {
 	describe("Test Error throwing", () => {
 		test("Catches Error Objects", () => {
 			// Reference is necessary to place into return object
 			const throwErr = async () => {
 				throw new Error();
 			};
-			return expect(noThrowAsync(throwErr)).resolves.toStrictEqual<
+			return expect(neverThrowAsync(throwErr)).resolves.toStrictEqual<
 				Err<typeof throwErr>
 			>({
 				isErr: true,
@@ -148,7 +153,7 @@ describe("Testing noThrowAsync", () => {
 				throw errToThrow;
 			};
 			// Check equality
-			return expect(noThrowAsync(throwErrFunction))
+			return expect(neverThrowAsync(throwErrFunction))
 				.resolves //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
@@ -164,7 +169,7 @@ describe("Testing noThrowAsync", () => {
 				throw errToThrow;
 			};
 			// Check equality
-			return expect(noThrowAsync(throwErrFunction))
+			return expect(neverThrowAsync(throwErrFunction))
 				.resolves //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
@@ -179,7 +184,7 @@ describe("Testing noThrowAsync", () => {
 			const throwErrFunction = async () => {
 				throw errToThrow;
 			};
-			return expect(noThrowAsync(throwErrFunction))
+			return expect(neverThrowAsync(throwErrFunction))
 				.resolves //
 				.toStrictEqual<Err<typeof throwErrFunction>>({
 					isErr: true,
@@ -192,7 +197,7 @@ describe("Testing noThrowAsync", () => {
 	describe("Test with successful async function", () => {
 		test("Returns correct value with no arguments", () => {
 			const num = async () => 42;
-			return expect(noThrowAsync(num))
+			return expect(neverThrowAsync(num))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof num>>({
 					isErr: false,
@@ -203,7 +208,7 @@ describe("Testing noThrowAsync", () => {
 		});
 		test("Returns correct value with 1 argument", () => {
 			const strIdent = async (x: string) => x;
-			return expect(noThrowAsync(strIdent, "hello world"))
+			return expect(neverThrowAsync(strIdent, "hello world"))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof strIdent>>({
 					isErr: false,
@@ -216,7 +221,7 @@ describe("Testing noThrowAsync", () => {
 			/** Returns all arguments as an array */
 			const restIdentity = async (...x: readonly any[]) => x;
 			const inputArray = [0, 1, "2", 3, 4] as const;
-			return expect(noThrowAsync(restIdentity, ...inputArray))
+			return expect(neverThrowAsync(restIdentity, ...inputArray))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof restIdentity>>({
 					isErr: false,
@@ -229,7 +234,7 @@ describe("Testing noThrowAsync", () => {
 	describe("Test with successful synchronous function", () => {
 		test("Returns correct value with no arguments", () => {
 			const num = () => 42;
-			return expect(noThrowAsync(num))
+			return expect(neverThrowAsync(num))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof num>>({
 					isErr: false,
@@ -240,7 +245,7 @@ describe("Testing noThrowAsync", () => {
 		});
 		test("Returns correct value with 1 argument", () => {
 			const strIdent = (x: string) => x;
-			return expect(noThrowAsync(strIdent, "hello world"))
+			return expect(neverThrowAsync(strIdent, "hello world"))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof strIdent>>({
 					isErr: false,
@@ -253,7 +258,7 @@ describe("Testing noThrowAsync", () => {
 			/** Returns all arguments as an array */
 			const restIdentity = (...x: readonly any[]) => x;
 			const inputArray = [0, 1, "2", 3, 4] as const;
-			return expect(noThrowAsync(restIdentity, ...inputArray))
+			return expect(neverThrowAsync(restIdentity, ...inputArray))
 				.resolves //
 				.toStrictEqual<AwaitedSuccess<typeof restIdentity>>({
 					isErr: false,
@@ -265,11 +270,13 @@ describe("Testing noThrowAsync", () => {
 	});
 	describe("Intentional errors on misuse", () => {
 		test("Throws Error if called without a callback", () => {
-			return expect(noThrowAsync).rejects.toThrowError(/.+ is not a function/);
+			return expect(neverThrowAsync).rejects.toThrowError(
+				/.+ is not a function/
+			);
 		});
 		test("Throws Error if called with a callback that isn't callable", () => {
 			//@ts-expect-error
-			return expect(() => noThrowAsync(42)).rejects.toThrowError(
+			return expect(() => neverThrowAsync(42)).rejects.toThrowError(
 				/.+ is not a function/
 			);
 		});

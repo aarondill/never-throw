@@ -1,26 +1,26 @@
-# noThrow.ts
+# neverThrow.ts
 
 Simplify Error handling!
 
 ## Usage:
 
 import the named functions
-(The noThrow function can also be imported through the default import):
+(The neverThrow function can also be imported through the default import):
 
 ```javascript
-import { noThrow, noThrowAsync } from "../src/noThrow";
+import { neverThrow, neverThrowAsync } from "../src/neverThrow";
 ```
 
 Call `foo` with error handling
 
 ```js
-const result = noThrow(foo);
+const result = neverThrow(foo);
 
 // Pass arguments to foo:
-const result = noThrow(foo, 1, 2, 3);
+const result = neverThrow(foo, 1, 2, 3);
 
 // Using an async function:
-const result = await noThrowAsync(bar, 1, 2, 3);
+const result = await neverThrowAsync(bar, 1, 2, 3);
 //                   ^ Returns a promise
 ```
 
@@ -28,7 +28,7 @@ Returns an object with 'return' or 'error' depending on if the function threw.
 Example output:
 
 ```js
-console.log(noThrow(x=>x, "Hello, world!"));
+console.log(neverThrow(x=>x, "Hello, world!"));
 {
     isErr: false,
     return: "Hello, world!",
@@ -41,7 +41,7 @@ If an error is thrown:
 
 ```js
 // Throws a string!!
-console.log(noThrow(function(x){throw x}, "Hello, world!"));
+console.log(neverThrow(function(x){throw x}, "Hello, world!"));
 {
     isErr: true,
     err: Error("Hello, world!"),
@@ -64,8 +64,8 @@ console.log(noThrow(function(x){throw x}, "Hello, world!"));
 - BaseReturn - The return value, without 'err' or 'success' properties
 - Err - The object return when an error is thrown
 - Success - The object returned when no error is thrown
-- AwaitedSuccess - Success returned from `noThrowAsync`, equivalent to Success
-- AwaitedErr - Error returned from `noThrowAsync`, equivalent to Err
+- AwaitedSuccess - Success returned from `neverThrowAsync`, equivalent to Success
+- AwaitedErr - Error returned from `neverThrowAsync`, equivalent to Err
 
 ### note:
 

@@ -1,4 +1,4 @@
-/** (Readonly) Return values from the `functionWrapper` function */
+/** (Readonly) Return values from the `neverThrow` function */
 export type BaseReturn<CallbackFunction extends (...args: any) => any> =
 	Readonly<{
 		function: CallbackFunction;
@@ -29,7 +29,7 @@ export type AwaitedErr<CallbackFunction extends (...args: any) => any> =
 			readonly error: Error;
 		}
 	>;
-export async function noThrowAsync<
+export async function neverThrowAsync<
 	CallbackArgs extends Array<any>,
 	CallbackReturn
 >(
@@ -74,7 +74,7 @@ export async function noThrowAsync<
  * 	object with `error` or `return` value depending on whether cb threw
  *  also has `args` and `function` properties, defined by the inputs
  */
-export function noThrow<CallbackArgs extends Array<any>, CallbackReturn>(
+export function neverThrow<CallbackArgs extends Array<any>, CallbackReturn>(
 	cb: (...args: CallbackArgs) => CallbackReturn,
 	...args: CallbackArgs
 ): Success<typeof cb> | Err<typeof cb> {
@@ -102,4 +102,4 @@ export function noThrow<CallbackArgs extends Array<any>, CallbackReturn>(
 		return r;
 	}
 }
-export default noThrow;
+export default neverThrow;

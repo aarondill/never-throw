@@ -1,19 +1,23 @@
 {
-	"name": "no-throw",
+	"name": "never-throw",
 	"version": "1.0.0",
 	"description": "Simplfy Error Handling",
 	"keywords": [
 		"try",
 		"catch",
 		"nothrow",
+		"never throw",
 		"type safe",
 		"safe"
 	],
 	"license": "MIT",
-	"repository": "https://github.com/aarondill/no-throw",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aarondill/never-throw"
+	},
 	"author": "Aaron Dill",
-	"main": "dist/noThrow.js",
-	"types": "dist/noThrow.d.ts",
+	"main": "dist/neverThrow.js",
+	"types": "dist/neverThrow.d.ts",
 	"scripts": {
 		"prebuild": "npm run lint && npm run clean",
 		"build": "tsc --build",
