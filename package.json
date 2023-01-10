@@ -1,6 +1,6 @@
 {
 	"name": "@aarond309/never-throw",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Simplfy Error Handling",
 	"keywords": [
 		"try",
