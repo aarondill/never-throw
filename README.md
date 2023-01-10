@@ -1,6 +1,6 @@
-# neverThrow.ts
+# neverThrow.js
 
-Simplify Error handling!
+Simplify error handling!
 
 ## Usage:
 
@@ -67,7 +67,7 @@ console.log(neverThrow(function(x){throw x}, "Hello, world!"));
 - AwaitedSuccess - Success returned from `neverThrowAsync`, equivalent to Success
 - AwaitedErr - Error returned from `neverThrowAsync`, equivalent to Err
 
-### note:
+### Note:
 
 ```typescript
 if (result.isErr === true) result is Success
