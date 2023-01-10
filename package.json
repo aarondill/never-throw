@@ -29,7 +29,6 @@
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.mts,.cts,.tsx --fix",
 		"prepublishOnly": "npm run build",
 		"sort-package": "sort-package-json",
-		"pretest": "npm run lint",
 		"test": "jest",
 		"prewatch": "npm run clean",
 		"watch": "tsc --watch"
